@@ -3106,13 +3106,13 @@ export default class TaggerSpace extends Component {
         {renderArrs}
       </div>);
     }
-    return <div style={{
+    return (<div style={{
       display: 'flex',
       flexDirection: 'row',
       flexWrap: 'wrap',
       maxHeight: '10em',
       overflow: 'auto'
-    }}>{renderArrs}</div>;
+    }}>{renderArrs}</div>);
   }
 
   deleteItem() {

@@ -69,7 +69,7 @@ export default class TaggerStats extends Component {
     console.log('Did mount TaggerStats ', this.state.projectDetails);
     if (this.props.params.orgName && this.props.params.projectName) {
       this.props.setCurrentProject({orgName: this.props.params.orgName, projectName: this.props.params.projectName}, getUidToken());
-    }else if ((!this.state.projectDetails && this.props.currentProject) ||
+    } else if ((!this.state.projectDetails && this.props.currentProject) ||
       (this.state.projectDetails && !this.state.projectDetails.contributorDetails )) {
       this.loadProjectDetails();
     }

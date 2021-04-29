@@ -147,7 +147,7 @@ export default class PolygonAnnotator extends Component {
         this.setState({
           currentRect
         });
-      }else if (event.target.nodeName === 'circle') {
+      } else if (event.target.nodeName === 'circle') {
         console.log('drag start', event.offsetX, event.offsetY, event.target.id);
         const splits = event.target.id.split('--');
         // console.log('splits are', )

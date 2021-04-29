@@ -38,34 +38,49 @@ const schema = {
 // // export const ref = firebase.database().ref();
 // export const firebaseAuth = firebase.auth;
 
-module.exports = Object.assign({
-  host: process.env.HOST || 'localhost',
-  port: process.env.PORT,
-  apiHost: process.env.APIHOST || 'localhost',
-  apiPort: process.env.APIPORT,
-  apiURL: process.env.BASE_URL || 'https://dataturks.com/dataturks/',
-  servingEnv: process.env.NODE_DEST || 'online',
-  app: {
-    title: 'Dataturks',
-    description: 'Just upload your data, invite your team members and start tagging. The best way to tag training/evaluation data for your machine learning projects.',
-    head: {
-      titleTemplate: 'Dataturks: %s',
-      meta: [
-        {name: 'description',
-        content: 'Image Bounding Box, Image Classification, Text Classification, NER, NLP and other Machine Learning datasets'},
-        {script: [schema]},
-        {charset: 'utf-8'},
-        {property: 'og:site_name', content: 'DataTurks'},
-        {property: 'og:locale', content: 'en_US'},
-        {property: 'og:title', content: 'Best online platform for your ML data annotation needs'},
-        {property: 'og:description', content: 'Just upload your data, invite your team members and start tagging. The best way to tag training/evaluation data for your machine learning projects.'},
-        {property: 'og:card', content: 'summary'},
-        {property: 'og:site', content: '@dataturks'},
-        {property: 'og:creator', content: '@dataturks'},
-        {property: 'og:image:width', content: '200'},
-        {property: 'og:image:height', content: '200'}
-      ]
-    }
+module.exports = Object.assign(
+  {
+    host: process.env.HOST || "localhost",
+    port: process.env.PORT,
+    apiHost: process.env.APIHOST || "localhost",
+    apiPort: process.env.APIPORT,
+    // apiURL: process.env.BASE_URL || 'https://dataturks.com/dataturks/',
+    apiURL: process.env.BASE_URL || "http://localhost:9090/dataturks/",
+    // servingEnv: process.env.NODE_DEST || "online",
+    servingEnv: process.env.NODE_DEST || "onpremise",
+    app: {
+      title: "Dataturks",
+      description:
+        "Just upload your data, invite your team members and start tagging. The best way to tag training/evaluation data for your machine learning projects.",
+      head: {
+        titleTemplate: "Dataturks: %s",
+        meta: [
+          {
+            name: "description",
+            content:
+              "Image Bounding Box, Image Classification, Text Classification, NER, NLP and other Machine Learning datasets",
+          },
+          { script: [schema] },
+          { charset: "utf-8" },
+          { property: "og:site_name", content: "DataTurks" },
+          { property: "og:locale", content: "en_US" },
+          {
+            property: "og:title",
+            content: "Best online platform for your ML data annotation needs",
+          },
+          {
+            property: "og:description",
+            content:
+              "Just upload your data, invite your team members and start tagging. The best way to tag training/evaluation data for your machine learning projects.",
+          },
+          { property: "og:card", content: "summary" },
+          { property: "og:site", content: "@dataturks" },
+          { property: "og:creator", content: "@dataturks" },
+          { property: "og:image:width", content: "200" },
+          { property: "og:image:height", content: "200" },
+        ],
+      },
+    },
   },
-
-}, environment);
+  environment
+);
