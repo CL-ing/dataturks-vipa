@@ -1,0 +1,81 @@
+@import "@/styles/variables.scss";
+
+.navbar {
+    color: #fff;
+    background-color: $navbarBgColor;
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    font-size: 1.5em;
+    font-weight: 800;
+}
+
+.container {
+    padding: 150px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .buttonWrap {
+        width: 200px;
+        margin-top: 40px;
+        color: #000;
+        background-color: #b64792;
+        border-color: #b64792;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 500;
+        &:hover {
+            background-color: #b64792;
+            border-color: #b64792;
+            color: #fff;
+        }
+    }
+    .loginWrap {
+        margin-bottom: 80px;
+        color: #fff;
+        background-color: #3b5998;
+        border-color: #3b5998;
+        &:hover {
+            background-color: #3b5998;
+            border-color: #3b5998;
+        }
+    }
+}
+
+.footerWrap {
+    background-color: #232f41;
+    padding: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .linkArrWrap {
+        width: 900px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        .itemWrap {
+            width: 30%;
+            color: #fff;
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            .itemTitle {
+                font-weight: 500;
+                margin-bottom: 20px;
+                font-size: 22px;
+            }
+            .itemLink {
+                font-size: 16px;
+                cursor: pointer;
+                color: #ccc;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
