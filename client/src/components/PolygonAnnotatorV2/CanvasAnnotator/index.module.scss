@@ -1,0 +1,27 @@
+.canvasWrap {
+  display: flex;
+  flex-direction: column;
+  background-color: #e0e0e0;
+  padding: 0.5rem;
+}
+
+.labelWrap {
+  margin-top: 5px;
+  align-content: flex-start;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  .labelBtn {
+    max-width: 20%;
+    word-break: break-word;
+    border-radius: 7px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    margin-right: 6px;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
