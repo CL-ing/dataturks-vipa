@@ -26,7 +26,11 @@ const scriptInnerHTML = `
                     "@context": "http://schema.org",
                     "@type": "WebPage",
                     "name" : "DataTurks",
+<<<<<<< HEAD
                     "url": "http://47.111.17.95:3030/projects"
+=======
+                    "url": "http://localhost:3000/projects"
+>>>>>>> tmp
                   }
                 `
 const schema = {

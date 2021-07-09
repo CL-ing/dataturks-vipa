@@ -81,7 +81,11 @@ const routes = [
         exact: true,
         component: TaggerEdit,
       },
+<<<<<<< HEAD
       // {path: "/projects/:orgName/:projectName/keybind", component: TaggerKeyBind},
+=======
+      { path: '/userHome/projects/:orgName/:projectName/keybind', component: TaggerKeyBind },
+>>>>>>> tmp
 
       // {path: "/projects/import", component: TaggerImport},
       // {path: "/projects/space", component: TaggerSpace},

@@ -1,8 +1,11 @@
 import {
   convertKeyToString,
   hitStateNameMap,
+<<<<<<< HEAD
   HIT_EVALUATION_CORRECT,
   HIT_EVALUATION_INCORRECT,
+=======
+>>>>>>> tmp
   HIT_STATE_AL,
   HIT_STATE_DELETED,
   HIT_STATE_DONE,
@@ -17,6 +20,7 @@ import {
   TEXT_CLASSIFICATION,
 } from '@/helpers/Utils'
 import React from 'react'
+<<<<<<< HEAD
 import { useHistory, useParams } from 'react-router-dom'
 import { Accordion, Dropdown, Icon, Label } from 'semantic-ui-react'
 import Popover from 'react-bootstrap/lib/Popover'
@@ -314,6 +318,68 @@ export const showTaggingInstructions = parentState => {
 }
 
 export function getHitInfo(hit) {
+=======
+import { Accordion, Icon, Label } from 'semantic-ui-react'
+import Popover from 'react-bootstrap/lib/Popover'
+
+export const renderSelectorArr = (contributorDetails = [], entities) => {
+  return [
+    {
+      valueKey: 'status',
+      placeholder: 'Select State',
+      options: [
+        { text: 'Done HITs', value: HIT_STATE_DONE },
+        { text: 'SL HITs', value: HIT_STATE_SL },
+        { text: 'AL HITs', value: HIT_STATE_AL },
+        { text: 'Skipped HITs', value: HIT_STATE_SKIPPED },
+        { text: 'Deleted HITs', value: HIT_STATE_DELETED },
+        { text: 'Pre-Tagged HITs', value: HIT_STATE_PRE_TAGGED },
+        { text: 'Re-Tagging Queue', value: HIT_STATE_REQUEUED },
+      ],
+    },
+    {
+      valueKey: 'evaluationType',
+      placeholder: 'Filter By Evaluation Status',
+      options: [
+        { text: 'Correct', value: 'correct' },
+        { text: 'Incorrect', value: 'incorrect' },
+        { text: 'Not Evaluated', value: 'none' },
+        { text: 'All', value: 'all' },
+      ],
+    },
+    {
+      valueKey: 'userId',
+      placeholder: 'Filter by Contributor',
+      options: [
+        ...contributorDetails.map(contributor => ({
+          text: contributor?.userDetails?.firstName,
+          value: contributor?.userDetails?.uid,
+        })),
+        {
+          text: 'All',
+          value: 'all',
+        },
+      ],
+    },
+    {
+      valueKey: 'label',
+      placeholder: 'Filter by Tagged Entity',
+      options: [
+        ...entities.map(entity => ({
+          text: entity,
+          value: entity,
+        })),
+        {
+          text: 'All',
+          value: 'all',
+        },
+      ],
+    },
+  ]
+}
+
+export const getHitInfo = hit => {
+>>>>>>> tmp
   if (hit) {
     const fileName = hit.fileName
     const status = hit.status
@@ -334,6 +400,7 @@ export function getHitInfo(hit) {
   }
 }
 
+<<<<<<< HEAD
 export const getPopoverTop = taskType => {
   let popoverTop
   if (taskType === POS_TAGGING) {
@@ -387,6 +454,8 @@ export const getPopoverTop = taskType => {
   return popoverTop
 }
 
+=======
+>>>>>>> tmp
 export const getKeyboardShortcuts = shortcuts => {
   const shorts = Object.keys(shortcuts)
   let completeContent = ''

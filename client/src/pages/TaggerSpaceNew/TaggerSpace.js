@@ -2,7 +2,11 @@
  * @Author: Azhou
  * @Date: 2021-06-15 11:46:11
  * @LastEditors: Azhou
+<<<<<<< HEAD
  * @LastEditTime: 2021-07-04 19:56:34
+=======
+ * @LastEditTime: 2021-07-08 15:41:31
+>>>>>>> tmp
  */
 import {
   DOCUMENT_ANNOTATION,
@@ -12,7 +16,11 @@ import {
 } from '@/helpers/Utils'
 import useQuery from '@/hooks/useQuery'
 import { fetchProjectDetail, fetchProjectHits, updateHitStatus } from '@/request/actions/project'
+<<<<<<< HEAD
 import React, { useEffect, useMemo, useRef, useState } from 'react'
+=======
+import React, { useEffect, useMemo, useState } from 'react'
+>>>>>>> tmp
 import { useSelector, useDispatch } from 'react-redux'
 import CreateFullScreen from './CreateFullScreen'
 import DoneLeftPanel from './DoneLeftPanel'
@@ -31,9 +39,14 @@ import { message, Modal, Spin } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 
 const TaggerSpaceNew = () => {
+<<<<<<< HEAD
   let { type, label, evaluationType, contributorId } = useQuery()
   const dispatch = useDispatch()
   const docAnnotator = useRef()
+=======
+  let queryInfo = useQuery()
+  const dispatch = useDispatch()
+>>>>>>> tmp
 
   const {
     projectDetails,
@@ -52,12 +65,27 @@ const TaggerSpaceNew = () => {
   const [loading, setLoading] = useState(true)
   const [changesInSession, setChangesInSession] = useState(0)
   const [filterValue, setFilterValue] = useState({
+<<<<<<< HEAD
     currentStart: 0,
     currentCount: 10,
   })
 
   const fetchData = async () => {
     if (!type) return
+=======
+    status: '',
+    label: '',
+    userId: '',
+    evaluationType: '',
+  })
+  const [globalFlag, setGlobalFlag] = useState({
+    fullScreen: false,
+    keepEntitySelected: false,
+  })
+
+  const fetchData = async () => {
+    if (!filterValue.status) return
+>>>>>>> tmp
 
     const currentProjectPid = localStorage.getItem('currentProject')
     if (currentProjectPid) {
@@ -70,6 +98,7 @@ const TaggerSpaceNew = () => {
       })
       // 获取项目标记信息
       const hitsRes = await fetchProjectHits(currentProjectPid, {
+<<<<<<< HEAD
         start: filterValue.currentStart,
         count: filterValue.currentCount,
         status: type,
@@ -77,6 +106,11 @@ const TaggerSpaceNew = () => {
         label: label ? label.replace(' ', '+') : undefined,
         userId: contributorId,
         evaluationType,
+=======
+        ...filterValue,
+        start: 0,
+        count: 10,
+>>>>>>> tmp
       })
       const { hits = [] } = hitsRes.data
       dispatch({
@@ -102,7 +136,11 @@ const TaggerSpaceNew = () => {
     }
   }
 
+<<<<<<< HEAD
   const isHitted = useMemo(() => getIsHitted(type), [type])
+=======
+  const isHitted = useMemo(() => getIsHitted(filterValue.status), [filterValue.status])
+>>>>>>> tmp
 
   useEffect(() => {
     setParentState(getState())
@@ -114,6 +152,7 @@ const TaggerSpaceNew = () => {
 
   // 路由的query参数变化时重新获取参数
   useEffect(() => {
+<<<<<<< HEAD
     fetchData()
   }, [type, label, evaluationType, contributorId])
 
@@ -127,6 +166,24 @@ const TaggerSpaceNew = () => {
     const result = getCurrentResult(currentImgInfo, boundingBoxMap, currentHit)
     // console.log('result: ', result)
     // console.log('result: ', JSON.parse(result))
+=======
+    const { status = '', label = '', evaluationType = '', userId = '' } = queryInfo
+
+    setFilterValue({
+      ...filterValue,
+      status: status.toString(),
+      userId: userId.toString(),
+      evaluationType: evaluationType.toString(),
+      label: label.toString(),
+    })
+  }, [queryInfo])
+  useEffect(() => {
+    fetchData()
+  }, [filterValue])
+
+  const handleChangeHitStatus = async action => {
+    const result = getCurrentResult(currentImgInfo, boundingBoxMap, currentHit)
+>>>>>>> tmp
 
     let res
     switch (action) {
@@ -159,7 +216,11 @@ const TaggerSpaceNew = () => {
         res = await updateHitStatus(currentHit.id, projectDetails.id, action)
         break
       case 'reQueued':
+<<<<<<< HEAD
         res = await updateHitStatus(currentHit.id, projectDetails.id, 'notDone')
+=======
+        res = await updateHitStatus(currentHit.id, projectDetails.id, 'notDone', result)
+>>>>>>> tmp
         break
       case 'logResult':
         console.log('boundingBoxMap: ', boundingBoxMap)
@@ -223,6 +284,7 @@ const TaggerSpaceNew = () => {
     }
   }
   if (!parentState) return <div />
+<<<<<<< HEAD
   return (
     <Spin spinning={loading}>
       {projectHits?.length == 0 && type === 'notDone' ? (
@@ -233,6 +295,19 @@ const TaggerSpaceNew = () => {
             <DoneLeftPanel
               changesInSession={changesInSession}
               type={type}
+=======
+
+  return (
+    <Spin spinning={loading}>
+      {projectHits?.length == 0 && filterValue.status === 'notDone' ? (
+        <AllDone />
+      ) : (
+        <div style={{ display: 'flex', paddingTop: '15px' }}>
+          {filterValue.status !== 'notDone' && projectDetails.task_type !== POS_TAGGING && (
+            <DoneLeftPanel
+              changesInSession={changesInSession}
+              type={filterValue.status}
+>>>>>>> tmp
               isHitted={isHitted}
               handleChangeHitStatus={handleChangeHitStatus}
               saveElement={() => saveElement(currentHit, parentState, projectDetails)}
@@ -241,6 +316,7 @@ const TaggerSpaceNew = () => {
           )}
           <div style={{ padding: '0 0.5rem', width: '100%' }}>
             <DoneTopBar
+<<<<<<< HEAD
               isHitted={isHitted}
               type={type}
               handleToggle={handleToggle}
@@ -250,6 +326,14 @@ const TaggerSpaceNew = () => {
             />
             <br />
             {type === 'notDone' &&
+=======
+              globalFlag={globalFlag}
+              setGlobalFlag={setGlobalFlag}
+              filterValue={filterValue}
+            />
+            <br />
+            {filterValue.status === HIT_STATE_NOT_DONE &&
+>>>>>>> tmp
               (projectDetails.task_type === DOCUMENT_ANNOTATION ||
                 projectDetails.task_type === POS_TAGGING_GENERIC) && (
                 <p className={styles.pTips}>
@@ -262,7 +346,11 @@ const TaggerSpaceNew = () => {
                   </li>
                 </p>
               )}
+<<<<<<< HEAD
             {type !== HIT_STATE_NOT_DONE && (
+=======
+            {filterValue.status !== HIT_STATE_NOT_DONE && (
+>>>>>>> tmp
               <div className="text-center">
                 {projectHits.length === 0 && <h2> No items to display here </h2>}
               </div>

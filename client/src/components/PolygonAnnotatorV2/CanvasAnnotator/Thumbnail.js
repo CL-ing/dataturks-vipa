@@ -2,7 +2,11 @@
  * @Author: Azhou
  * @Date: 2021-06-01 20:31:36
  * @LastEditors: Azhou
+<<<<<<< HEAD
  * @LastEditTime: 2021-07-04 20:10:19
+=======
+ * @LastEditTime: 2021-07-06 21:01:46
+>>>>>>> tmp
  */
 import React, { useEffect, useState } from 'react'
 import { Slider } from 'antd'

@@ -2,7 +2,11 @@
  * @Author: Azhou
  * @Date: 2021-05-28 14:35:04
  * @LastEditors: Azhou
+<<<<<<< HEAD
  * @LastEditTime: 2021-06-17 17:52:18
+=======
+ * @LastEditTime: 2021-07-06 20:53:14
+>>>>>>> tmp
  */
 import {
   hitStateNameMap,
@@ -17,7 +21,11 @@ import { Label, Card, Button, Icon } from 'semantic-ui-react'
 
 export const getHitDetails = (hit, contributorDetailsMap) => {
   if (hit && hit.hitResults && contributorDetailsMap) {
+<<<<<<< HEAD
     const hr = hit.hitResults[0]
+=======
+    const hr = hit.hitResults[0] || {}
+>>>>>>> tmp
     const { fileName, status, evaluation } = hit
     const userName = contributorDetailsMap[hr.userId]?.firstName || ''
     const userEmail = contributorDetailsMap[hr.userId]?.email || ''

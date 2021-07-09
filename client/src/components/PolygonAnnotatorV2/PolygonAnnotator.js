@@ -2,7 +2,11 @@
  * @Author: Azhou
  * @Date: 2021-06-21 11:29:47
  * @LastEditors: Azhou
+<<<<<<< HEAD
  * @LastEditTime: 2021-07-01 19:44:11
+=======
+ * @LastEditTime: 2021-07-08 16:24:24
+>>>>>>> tmp
  */
 import React, { useMemo, useState } from 'react'
 import styles from './index.module.scss'
@@ -21,10 +25,17 @@ const PolygonAnnotatorV2 = ({
   saveTagAndNextRow,
   saveRow,
 }) => {
+<<<<<<< HEAD
   let { type, label, evaluationType, contributorId } = useQuery()
 
   // @ts-ignore
   const { boundingBoxMap, currentHit, currentImgInfo } = useSelector(state => state.project)
+=======
+  let { status } = useQuery()
+
+  // @ts-ignore
+  const { boundingBoxMap, currentHit } = useSelector(state => state.project)
+>>>>>>> tmp
   const dispatch = useDispatch()
 
   const [hideLabelsMap, setHideLabelsMap] = useState({})
@@ -41,7 +52,11 @@ const PolygonAnnotatorV2 = ({
     dragging: false,
   })
 
+<<<<<<< HEAD
   const space = useMemo(() => type === HIT_STATE_NOT_DONE, [type])
+=======
+  const space = useMemo(() => status === HIT_STATE_NOT_DONE, [status])
+>>>>>>> tmp
 
   const clearPolygons = () => {
     if (window.confirm('Are you sure you wish to clear all tagged items?')) {

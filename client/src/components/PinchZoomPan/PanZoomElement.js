@@ -24,11 +24,14 @@ class PanZoomElement extends Component {
         y: this._panner.viewport.y,
       },
     }
+<<<<<<< HEAD
 
     this._onWheel = this._onWheel.bind(this)
     this._onMouseUp = this._onMouseUp.bind(this)
     this._onMouseDown = this._onMouseDown.bind(this)
     this._onMouseMove = this._onMouseMove.bind(this)
+=======
+>>>>>>> tmp
   }
 
   componentDidMount() {
@@ -141,7 +144,11 @@ class PanZoomElement extends Component {
 
   _onWheel(event) {
     console.log('_onwheel', event.target.className)
+<<<<<<< HEAD
     if (this.props.zoomable) {
+=======
+    if (this.props?.zoomable) {
+>>>>>>> tmp
       event.preventDefault()
       console.log(
         '_onwheel',
@@ -227,6 +234,10 @@ class PanZoomElement extends Component {
     }
 
     const setFunctions = () => {
+<<<<<<< HEAD
+=======
+      console.log('setting functions element', this.element)
+>>>>>>> tmp
       const element = this.element
       if (!this.state.elementSet && element) {
         console.log('setting element')

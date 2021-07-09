@@ -18,12 +18,20 @@ const NotDone = () => {
         Show project stats
       </Button>
       <div style={{ height: '30px' }} />
+<<<<<<< HEAD
       <Button onClick={() => history.push(`/projects/new/${orgName}/${projectName}/space?type=done`)}>
+=======
+      <Button onClick={() => history.push(`/projects/${orgName}/${projectName}/space?type=done`)}>
+>>>>>>> tmp
         Show Completed HITs
       </Button>
       <div style={{ height: '30px' }} />
       <Button
+<<<<<<< HEAD
         onClick={() => history.push(`/projects/new/${orgName}/${projectName}/space?type=skipped`)}
+=======
+        onClick={() => history.push(`/projects/${orgName}/${projectName}/space?type=skipped`)}
+>>>>>>> tmp
       >
         Show Skipped HITs
       </Button>

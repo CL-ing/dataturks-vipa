@@ -3,6 +3,12 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import {
+<<<<<<< HEAD
+=======
+  // tagData,
+  // nextRow,
+  // previousRow,
+>>>>>>> tmp
   updateProjectDetails,
   setCurrentHit,
   setCurrentProject,
@@ -85,7 +91,13 @@ import {
 import PanZoomElement from '../../components/PinchZoomPan/PanZoomElement'
 import Fullscreen from 'react-fullscreen-crossbrowser'
 import { Player, ControlBar, ForwardControl, PlaybackRateMenuButton } from 'video-react'
+<<<<<<< HEAD
 import {useHistory} from "react-router-dom";
+=======
+// const entities = [
+//   'NN', 'NP', 'NMP', 'NNRS'
+// ];
+>>>>>>> tmp
 
 // const INITIAL_COUNT = 10;
 const styles = require('./TaggerSpace.scss')
@@ -141,10 +153,18 @@ export default class TaggerSpace extends Component {
   }
 
   constructor(props) {
+<<<<<<< HEAD
     console.log('TaggerSpace props are ', props)
     super(props)
     let type = 'notDone'
     if (props.location && props.location.query && props.location.query.type) {            // ++++++++++++++++++++
+=======
+    super(props)
+    console.log('TaggerSpace props are ', props)
+
+    let type = 'notDone'
+    if (props.location && props.location.query && props.location.query.type) {
+>>>>>>> tmp
       type = props.location.query.type
     }
     if (type === 'all') {
@@ -243,6 +263,35 @@ export default class TaggerSpace extends Component {
         }
       }
 
+<<<<<<< HEAD
+=======
+      // this.setState({
+      //   tagLine: data ? data : tagLine,
+      //   clickedColor,
+      //   taggedEntity,
+      //   words,
+      //   selectIds: [],
+      //   changesInSession: 0,
+      //   startTime: new Date().getTime()
+      // });
+
+      // const clickedColor = {};
+      // const taggedEntity = {};
+      // const words = [];
+      // for (let index = 0; index < splits.length; index++) {
+      //   const word = splits[index];
+      //   const wordSplits = word.split("____");
+      //   if (wordSplits.length > 1) {
+      //     clickedColor[index] = entityColorMap[wordSplits[1]];
+      //     taggedEntity[index] = wordSplits[1];
+      //     words[index] = wordSplits[0];
+      //   } else {
+      //     clickedColor[index] = "";
+      //     taggedEntity[index] = "__";
+      //     words[index] = splits[index];
+      //   }
+      // }
+>>>>>>> tmp
       const ch = this.props.currentHit
       this.state = {
         type,
@@ -517,11 +566,28 @@ export default class TaggerSpace extends Component {
     if (this.state.type !== 'notDone' && this.props.currentProject) {
       this.props.getProjectDetails(this.props.currentProject, getUidToken())
     }
+<<<<<<< HEAD
+=======
+    // if (this.props.currentProject && (!this.state.projectDetails || !this.state.hits || !this.props.currentHit)) {
+    //   this.loadProjectDetails();
+    // }
+>>>>>>> tmp
     const editor = document.getElementById('write_text')
     console.log('editor is ', editor)
     if (editor !== null) {
       editor.setAttribute('data-gramm', 'false')
     }
+<<<<<<< HEAD
+=======
+    // this.loadData()
+    // .then((data) => {
+    //   console.log('Data loaded');
+    //   this.setState({
+    //     data: data,
+    //     loading: false
+    //   });
+    // });
+>>>>>>> tmp
   }
 
   componentWillReceiveProps(props) {
@@ -541,8 +607,12 @@ export default class TaggerSpace extends Component {
     }
     if (this.props.location !== props.location) {
       if (props.location && props.location.query && props.location.query.type) {
+<<<<<<< HEAD
         this.state.type =  props.location.query.type
         console.log("this.state.type", this.state.type)
+=======
+        this.state.type = props.location.query.type
+>>>>>>> tmp
       }
       if (props.location && props.location.query && props.location.query.label) {
         this.state.label = props.location.query.label
@@ -554,7 +624,11 @@ export default class TaggerSpace extends Component {
         this.state.evaluationType = props.location.query.evaluationType
       }
       this.state.hitsCompleted = false
+<<<<<<< HEAD
       this.loadProjectDetails(props.currentProject, this.state.start, this.state.count)   // -------------------------
+=======
+      this.loadProjectDetails(props.currentProject, this.state.start, this.state.count)
+>>>>>>> tmp
     }
     if (!this.props.projectDetails && props.projectDetails) {
       this.props.getProjectDetails(props.currentProject, getUidToken())
@@ -568,6 +642,10 @@ export default class TaggerSpace extends Component {
         ),
       })
     }
+<<<<<<< HEAD
+=======
+    // window.addEventListener('resize', this.resizeWindow);
+>>>>>>> tmp
   }
 
   componentDidUpdate() {
@@ -691,6 +769,14 @@ export default class TaggerSpace extends Component {
       this.hitAddCallback(undefined, 'Ok', 'previous')
     }
     return false
+<<<<<<< HEAD
+=======
+    // if (this.state.currentIndex > 0) {
+    //   const hit = this.state.hits[this.state.currentIndex - 1];
+    //   this.addHitinState(hit.result ? hit.result : hit.data);
+    //   this.setState({ currentHit: hit, currentIndex: this.state.currentIndex - 1, tagSelected: false, loading: false, selectIds: [] });
+    // }
+>>>>>>> tmp
   }
 
   setClassification(entity, event) {
@@ -706,11 +792,20 @@ export default class TaggerSpace extends Component {
     this.setState({ currentTags, changesInSession: changesInSession + 1 })
   }
 
+<<<<<<< HEAD
   getKeyboardShortcuts(shortcuts) {     // 返回一个多行字符串，记录着各种快捷键
+=======
+  getKeyboardShortcuts(shortcuts) {
+    console.log('shortcuts', shortcuts)
+>>>>>>> tmp
     const shorts = Object.keys(shortcuts)
     let completeContent = ''
     if (shorts) {
       for (let index = 0; index < shorts.length; index++) {
+<<<<<<< HEAD
+=======
+        console.log('shorts', shorts[index])
+>>>>>>> tmp
         const content = convertKeyToString(shortcuts[shorts[index]])
         completeContent = completeContent + shorts[index] + ':' + content + '\n'
       }
@@ -723,12 +818,31 @@ export default class TaggerSpace extends Component {
     let name = ''
     let displayName = ''
     let classification = this.state.classification
+<<<<<<< HEAD
+=======
+    // const shortcuts = this.state.shortcuts;
+    // const entiti = this.state.entities;
+>>>>>>> tmp
     for (let index = 0; index < classification.length; index++) {
       displayName = classification[0].displayName
         ? classification[0].displayName
         : classification[0].name
       name = classification[0].name
       let classes = classification[0].classes
+<<<<<<< HEAD
+=======
+      // let combo = '';
+      // if (entity in shortcuts) {
+      //   combo = convertKeyToString(shortcuts[entity]);
+      //   if (this.state.projectDetails.task_type === POS_TAGGING) {
+      //     Mousetrap.bind(combo, this.setTagClick.bind(this, null, {name: entity}));
+      //   } else {
+      //     if (this.state.currentIndex >= 0) {
+      //       Mousetrap.bind(combo, this.setClassification.bind(this, entity));
+      //     }
+      //   }
+      // }
+>>>>>>> tmp
       for (let jindex = 0; jindex < classes.length; jindex++) {
         let checked = false
         let selected = []
@@ -804,9 +918,14 @@ export default class TaggerSpace extends Component {
       onClick: () => {
         this.resetFilterState()
         logEvent('buttons', 'Select Done')
+<<<<<<< HEAD
 
         this.props.pushState(
             this.getUrl(
+=======
+        this.props.pushState(
+          this.getUrl(
+>>>>>>> tmp
             HIT_STATE_DONE,
             this.state.contributorId,
             this.state.label,
@@ -1007,19 +1126,31 @@ export default class TaggerSpace extends Component {
     }
   }
 
+<<<<<<< HEAD
   getHitInfo(hit) {                  // 获取当前标记的图像信息，处于页面的最上面
+=======
+  getHitInfo(hit) {
+>>>>>>> tmp
     if (hit) {
       const fileName = hit.fileName
       const status = hit.status
       return (
         <div>
           {fileName && (
+<<<<<<< HEAD
             <Label title="File Name" size="medium">
+=======
+            <Label title="File Name" size="mini">
+>>>>>>> tmp
               {fileName}
             </Label>
           )}
           {status && (
+<<<<<<< HEAD
             <Label title="HIT status" style={{ textTransform: 'capitalize' }} size="medium">
+=======
+            <Label title="HIT status" style={{ textTransform: 'capitalize' }} size="mini">
+>>>>>>> tmp
               {hitStateNameMap[status]}
             </Label>
           )}
@@ -1099,7 +1230,11 @@ export default class TaggerSpace extends Component {
           onClick: () => {
             this.resetFilterState()
             logEvent('buttons', 'Select Entity')
+<<<<<<< HEAD
             this.props.history.push(
+=======
+            this.props.pushState(
+>>>>>>> tmp
               this.getUrl(
                 this.state.type,
                 this.state.contributorId,
@@ -1160,12 +1295,20 @@ export default class TaggerSpace extends Component {
       this.state.projectDetails.task_type === TEXT_CLASSIFICATION ||
       this.state.projectDetails.task_type === IMAGE_CLASSIFICATION ||
       this.state.projectDetails.task_type === VIDEO_CLASSIFICATION
+<<<<<<< HEAD
     ) {                                             // 图像分类，获取
+=======
+    ) {
+>>>>>>> tmp
       const tags = [...this.state.currentTags]
       const result = {}
       result.labels = tags
       result.note = this.state.currentNote
+<<<<<<< HEAD
       return JSON.stringify(result)                // 返回标注结果的string化结果
+=======
+      return JSON.stringify(result)
+>>>>>>> tmp
     } else if (
       this.state.projectDetails.task_type === IMAGE_BOUNDING_BOX ||
       this.state.projectDetails.task_type === IMAGE_POLYGON_BOUNDING_BOX ||
@@ -1296,14 +1439,21 @@ export default class TaggerSpace extends Component {
     const { currentHit, changesInSession } = this.state
     console.log('saveElement', currentHit.id)
     let result = ''
+<<<<<<< HEAD
     if (changesInSession > 0) {                // 该标注图像曾经被标注过
+=======
+    if (changesInSession > 0) {
+>>>>>>> tmp
       result = this.getCurrentResult()
     } else if (currentHit.hitResults && currentHit.hitResults.length > 0) {
       result = currentHit.hitResults[0].result
     }
     this.state.currentHit.result = result
     this.state.currentHit.status = 'done'
+<<<<<<< HEAD
     console.log('result: ', result)
+=======
+>>>>>>> tmp
     if (this.state.classification && this.state.classification.length > 0) {
       if (Object.keys(this.state.classificationResponse).length === 0) {
         alert('Please choose atleast one classification')
@@ -1699,7 +1849,14 @@ export default class TaggerSpace extends Component {
                 boundingBoxMap = JSON.parse(currentHit.hitResults[0].result)
               }
             }
+<<<<<<< HEAD
 
+=======
+            // let currentTags = new Set();
+            // if (currentHit.hitResults !== null) {
+            //   currentTags = new Set(currentHit.hitResults[0].result.split('____'));
+            // }
+>>>>>>> tmp
             this.setState({
               boundingBoxMap,
               classification,
@@ -1995,6 +2152,17 @@ export default class TaggerSpace extends Component {
     this.props.pushState('/projects/stats')
   }
 
+<<<<<<< HEAD
+=======
+  // createEntityColorMap(entities) {
+  //   const colorMap = {};
+  //   for (let index = 0; index < entities.length; index ++) {
+  //     colorMap[entities[index]] = ENTITY_COLORS[index > ENTITY_COLORS.length ? index % ENTITY_COLORS.length : index ];
+  //   }
+  //   return colorMap;
+  // }
+
+>>>>>>> tmp
   skipRow(event, data) {
     console.log(' skipRow ', event, data, this.state)
     // const latency = ((new Date().getTime() - this.state.startTime) / 1000).toPrecision(3);
@@ -2031,7 +2199,10 @@ export default class TaggerSpace extends Component {
       this.setState({ loading: true, newEntities: [] })
     }
     const resultString = this.getCurrentResult()
+<<<<<<< HEAD
     console.log('resultString: ', resultString)
+=======
+>>>>>>> tmp
     this.state.currentHit.result = resultString
     if (this.state.changesInSession > 0) {
       if (this.state.classification && this.state.classification.length > 0) {
@@ -2186,8 +2357,11 @@ export default class TaggerSpace extends Component {
             padding: '5px',
             color: 'white',
             backgroundColor: entityColorMap[ent],
+<<<<<<< HEAD
             zIndex: 999,
             position: 'relative',
+=======
+>>>>>>> tmp
           }}
         >
           {' '}
@@ -2196,7 +2370,11 @@ export default class TaggerSpace extends Component {
         </Label>
       )
     }
+<<<<<<< HEAD
     return <div > {renderArrs} </div>
+=======
+    return <div> {renderArrs} </div>
+>>>>>>> tmp
   }
 
   showText() {
@@ -2216,7 +2394,11 @@ export default class TaggerSpace extends Component {
         </Button>
       </div>
     )
+<<<<<<< HEAD
   }                   // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   showTextAnnotation() {
     // const currentHit = this.state.currentHit;
@@ -2235,7 +2417,11 @@ export default class TaggerSpace extends Component {
         </Button>
       </div>
     )
+<<<<<<< HEAD
   }         // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   handleChange(field, element) {
     const value = element.target.value
@@ -2268,7 +2454,11 @@ export default class TaggerSpace extends Component {
         />
       )
     }
+<<<<<<< HEAD
   }          // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   showTags(entiti) {
     const renderArrs = []
@@ -2295,7 +2485,11 @@ export default class TaggerSpace extends Component {
           className={styles.clickableLabel}
           style={{
             padding: '5px',
+<<<<<<< HEAD
             color: 'black',
+=======
+            color: 'white',
+>>>>>>> tmp
             backgroundColor: this.state.entityColorMap[entity],
           }}
           onClick={this.setTagClick}
@@ -2307,7 +2501,11 @@ export default class TaggerSpace extends Component {
     }
 
     return <div>{renderArrs}</div>
+<<<<<<< HEAD
   }             // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   showImages() {
     console.log('images are ', this.state)
@@ -2467,9 +2665,16 @@ export default class TaggerSpace extends Component {
       newEntities,
       undoButton,
     })
+<<<<<<< HEAD
   }       // 图像分类任务用不到
 
   showDocumentAnnotation() {
+=======
+  }
+
+  showDocumentAnnotation() {
+    // using a generator function
+>>>>>>> tmp
     console.log('doc annotation taggerspace ', this.state)
     const { data } = this.state.currentHit
     const boundingBoxMap = this.state.boundingBoxMap
@@ -2524,7 +2729,11 @@ export default class TaggerSpace extends Component {
         />
       </div>
     )
+<<<<<<< HEAD
   }        // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   drawVideo = (obj, callback, param) => {
     console.log('draw handle', obj.rects, obj.rectTimeMap, callback, param)
@@ -2565,7 +2774,11 @@ export default class TaggerSpace extends Component {
     this.setState({ changesInSession, boundingBoxMap }, () => {
       if (callback) callback(param)
     })
+<<<<<<< HEAD
   }        // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   validPoints = points => {
     for (let index = 0; index < points.length; index++) {
@@ -2628,7 +2841,11 @@ export default class TaggerSpace extends Component {
     }
     console.log('boundingBoxMap is ', boundingBoxMap)
     this.setState({ changesInSession, boundingBoxMap })
+<<<<<<< HEAD
   }       // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   drawHandle = obj => {
     console.log('draw handle', obj)
@@ -2667,7 +2884,11 @@ export default class TaggerSpace extends Component {
     }
     console.log('boundingBoxMap is ', boundingBoxMap, newEntities, this.state.newEntities)
     this.setState({ changesInSession, boundingBoxMap, newEntities })
+<<<<<<< HEAD
   }        // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   showPolygonV2BoundingImages() {
     // using a generator function
@@ -2726,7 +2947,11 @@ export default class TaggerSpace extends Component {
         />
       </div>
     )
+<<<<<<< HEAD
   }       // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   showVideoAnnotation() {
     // using a generator function
@@ -2786,7 +3011,11 @@ export default class TaggerSpace extends Component {
         />
       </div>
     )
+<<<<<<< HEAD
   }       // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   showPolygonBoundingImages() {
     // using a generator function
@@ -2824,7 +3053,11 @@ export default class TaggerSpace extends Component {
         />
       </div>
     )
+<<<<<<< HEAD
   }       // 图像分类任务用不到
+=======
+  }
+>>>>>>> tmp
 
   showBoundingImages() {
     // using a generator function
@@ -2877,9 +3110,15 @@ export default class TaggerSpace extends Component {
         />
       </div>
     )
+<<<<<<< HEAD
   }            // 图像分类任务用不到
 
   showClassifyTags(flag, direct) {      // 图像分类任务右侧的select label 工具栏
+=======
+  }
+
+  showClassifyTags(flag, direct) {
+>>>>>>> tmp
     const entiti = this.state.entities
     const shortcuts = this.state.shortcuts
     console.log('entit is ', this.state, flag)
@@ -2898,10 +3137,18 @@ export default class TaggerSpace extends Component {
             Mousetrap.bind(combo, this.setClassification.bind(this, entity))
           }
         }
+<<<<<<< HEAD
         let margin = '5% 1% 5% 1%'
         if (!direct) {
           margin = '0.2%'
         }
+=======
+        let margin = '1% 5% 1% 5%'
+        if (!direct) {
+          margin = '0.2%'
+        }
+        // const color = ENTITY_COLORS[index > ENTITY_COLORS.length ? index - ENTITY_COLORS.length : index ];
+>>>>>>> tmp
         renderArrs.push(
           <Label
             style={{
@@ -2922,6 +3169,7 @@ export default class TaggerSpace extends Component {
         )
       }
     }
+<<<<<<< HEAD
 
     if (direct && direct === 'vertical') {
       let height = `${ 5 + renderArrs.length * 8 }%`
@@ -2943,6 +3191,27 @@ export default class TaggerSpace extends Component {
             boxSizing: 'border-box',
             display: 'flex',
             justifyContent: 'flex-end',
+=======
+    if (direct && direct === 'vertical') {
+      let height = '60%'
+      let minSearchEntities = 9
+      if (this.state.type !== 'notDone') {
+        height = '80%'
+        minSearchEntities = 15
+      }
+      return (
+        <div
+          style={{
+            padding: '0 5% 0 5%',
+            position: 'relative',
+            marginLeft: '15px',
+            borderRadius: '5px',
+            backgroundColor: '#f5f9fa',
+            border: '1px solid #eaf2f4',
+            boxSizing: 'border-box',
+            display: 'flex',
+            justifyContent: 'flex-start',
+>>>>>>> tmp
             flexDirection: 'column',
             height: `${height}`,
             overflow: 'auto',
@@ -2951,17 +3220,28 @@ export default class TaggerSpace extends Component {
           <Label size="mini" attached="top left">
             Select Label
           </Label>
+<<<<<<< HEAD
 
+=======
+>>>>>>> tmp
           <div>
             {entiti.length > minSearchEntities && (
               <Input
                 size="mini"
                 value={this.state.searchQuery}
+<<<<<<< HEAD
                 onChange={event => this.setState({ searchQuery: event.target.value })}   // searchQuery 是类别搜索框的内容
                 placeholder="Search..."
               />
             )}
           </div>          {/* 垂直防止类别，最多放置9个类别，当多于9个类别时，多于的类别不会展示，而其他类别通过搜索获得 */}
+=======
+                onChange={event => this.setState({ searchQuery: event.target.value })}
+                placeholder="Search..."
+              />
+            )}
+          </div>
+>>>>>>> tmp
           {renderArrs}
         </div>
       )
@@ -3123,9 +3403,14 @@ export default class TaggerSpace extends Component {
       confirmed = confirm('You have made some changes in session, will you like to save them ?')
     }
     if (confirmed) {
+<<<<<<< HEAD
       console.log(this.state.currentIndex, this.state.hits.length)
       if (action === 'next') {
           this.saveTagAndNextRow()
+=======
+      if (action === 'next') {
+        this.saveTagAndNextRow()
+>>>>>>> tmp
       } else {
         this.getBackTopreviousRow()
       }
@@ -3149,11 +3434,24 @@ export default class TaggerSpace extends Component {
   }
 
   showButtonsMini() {
+<<<<<<< HEAD
     const nextButtonDisabled = this.state.currentIndex < 0 || (this.state.hitScrollCompleted && this.state.currentIndex >= this.state.hits.length - 1)
+=======
+    // let nextButton = 'Next';
+    // let prevButton = 'Previous';
+    // let skipButton = 'Skip';
+    const nextButtonDisabled =
+      this.state.currentIndex < 0 ||
+      (this.state.hitScrollCompleted && this.state.currentIndex > this.state.hits.length - 1)
+>>>>>>> tmp
     if ('shortcuts' in this.state) {
       const shortcuts = this.state.shortcuts
       if ('next' in shortcuts) {
         const combo = convertKeyToString(shortcuts.next)
+<<<<<<< HEAD
+=======
+        // nextButton = 'Next (' + combo + ')';
+>>>>>>> tmp
         if (!nextButtonDisabled) {
           Mousetrap.bind(combo, this.nextRow.bind(this, 'next'))
         } else {
@@ -3515,6 +3813,10 @@ export default class TaggerSpace extends Component {
 
   showTaggingInstructions() {
     const { activeIndex } = this.state
+<<<<<<< HEAD
+=======
+    console.log('showTaggingInstructions')
+>>>>>>> tmp
     return (
       <Accordion>
         <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
@@ -3528,15 +3830,29 @@ export default class TaggerSpace extends Component {
         </Accordion.Content>
       </Accordion>
     )
+<<<<<<< HEAD
   }       // 取消使用
 
   render() {
+=======
+  }
+
+  render() {
+    // const {user, logout} = this.props;
+>>>>>>> tmp
     let popoverTop = undefined
     let keyobardPopover = undefined
     let prevWord = undefined
     let nextWord = undefined
+<<<<<<< HEAD
     console.log(' TaggerSpace state is ', this.props, this.state)
     let popupContent = 'Select word and then entity to tag.'
+=======
+    // const center = [51.505, -0.09];
+    console.log(' TaggerSpace state is ', this.props, this.state)
+    let popupContent = 'Select word and then entity to tag.'
+    // let keyboarS = 'Configure Keyboard Shortcuts';
+>>>>>>> tmp
     if (this.state.projectDetails) {
       keyobardPopover = (
         <Popover id="popover-positioned-top" style={{ whiteSpace: 'pre' }}>
@@ -3652,22 +3968,33 @@ export default class TaggerSpace extends Component {
               {!this.state.type && (
                 <h4> All items are tagged, You can check the project stats. </h4>
               )}
+<<<<<<< HEAD
 
               <Button
                 onClick={() =>{
                   this.props.history.push(
                     '/userHome/projects/' +
+=======
+              <Button
+                onClick={() =>
+                  this.props.pushState(
+                    '/projects/' +
+>>>>>>> tmp
                       this.props.match.params.orgName +
                       '/' +
                       this.props.match.params.projectName
                   )
                 }
+<<<<<<< HEAD
                 }
+=======
+>>>>>>> tmp
               >
                 Show project stats
               </Button>
               <div style={{ height: '30px' }} />
               <Button
+<<<<<<< HEAD
                 onClick={() => {
                   console.log(this.props.pushState)
                   console.log('/projects/' + this.props.match.params.orgName + '/' + this.props.match.params.projectName + '/space?type=done')
@@ -3684,12 +4011,24 @@ export default class TaggerSpace extends Component {
                   )
                 }
                 }
+=======
+                onClick={() =>
+                  this.props.history.push(
+                    '/projects/' +
+                      this.props.match.params.orgName +
+                      '/' +
+                      this.props.match.params.projectName +
+                      '/space?type=done'
+                  )
+                }
+>>>>>>> tmp
               >
                 Show Completed HITs
               </Button>
               <div style={{ height: '30px' }} />
               <Button
                 onClick={() =>
+<<<<<<< HEAD
                   this.props.history.push(
                     // '/projects/' +
                     //   this.props.match.params.orgName +
@@ -3700,6 +4039,14 @@ export default class TaggerSpace extends Component {
                       pathname: '/projects/' + this.props.match.params.orgName + '/' + this.props.match.params.projectName + '/space',
                       query: {type: 'skipped'}
                     }
+=======
+                  this.props.pushState(
+                    '/projects/' +
+                      this.props.match.params.orgName +
+                      '/' +
+                      this.props.match.params.projectName +
+                      '/space?type=skipped'
+>>>>>>> tmp
                   )
                 }
               >
@@ -3709,6 +4056,12 @@ export default class TaggerSpace extends Component {
           )}
         </div>
       )
+<<<<<<< HEAD
+=======
+    // const docLabels = this.docAnnotator ? this.docAnnotator.getLabels() : undefined;
+    // console.log('doclabels ', docLabels);
+    // const { tagLine } = this.state;
+>>>>>>> tmp
     return (
       <div>
         {!this.props.projectDetails && <Segment basic vertical loading />}
@@ -3759,7 +4112,18 @@ export default class TaggerSpace extends Component {
                     icon
                     title="Back"
                     className="pull-left"
+<<<<<<< HEAD
                     onClick={() => this.props.history.push(`/userHome/projects/${this.props.match.params.orgName}/${this.props.match.params.projectName}`)}
+=======
+                    onClick={() =>
+                      this.props.pushState(
+                        '/projects/' +
+                          this.props.match.params.orgName +
+                          '/' +
+                          this.props.match.params.projectName
+                      )
+                    }
+>>>>>>> tmp
                     compact
                   >
                     <Icon color="teal" name="arrow left" />
@@ -3769,7 +4133,11 @@ export default class TaggerSpace extends Component {
                     icon
                     title="Home"
                     className="pull-left"
+<<<<<<< HEAD
                     onClick={() => this.props.history.push('/userHome/my-projects/')}
+=======
+                    onClick={() => this.props.pushState('/projects/')}
+>>>>>>> tmp
                     compact
                   >
                     <Icon size="large" name="home" color="teal" />
@@ -3799,12 +4167,21 @@ export default class TaggerSpace extends Component {
                       </div>
                     )}
                 </div>
+<<<<<<< HEAD
                 {/*{(this.state.type === HIT_STATE_NOT_DONE ||*/}
                 {/*  this.props.projectDetails.task_type === POS_TAGGING) && (*/}
                 {/*  <div style={{ flexGrow: 2, alignSelf: 'left' }}>*/}
                 {/*    {this.showTaggingInstructions()}*/}
                 {/*  </div>*/}
                 {/*)}*/}
+=======
+                {(this.state.type === HIT_STATE_NOT_DONE ||
+                  this.props.projectDetails.task_type === POS_TAGGING) && (
+                  <div style={{ flexGrow: 2, alignSelf: 'center' }}>
+                    {this.showTaggingInstructions()}
+                  </div>
+                )}
+>>>>>>> tmp
                 {this.state.type === HIT_STATE_NOT_DONE && this.state.currentHit && (
                   <div style={{ flexGrow: 1.5, alignSelf: 'center' }}>
                     {' '}
@@ -4094,6 +4471,10 @@ export default class TaggerSpace extends Component {
                             <Segment basic vertical loading />
                           )}
                           {this.showClassifyTags(true, 'vertical')}
+<<<<<<< HEAD
+=======
+                          <br />
+>>>>>>> tmp
                           {this.state.type === 'notDone' && this.showButtons('vertical')}
                         </div>
                       </div>

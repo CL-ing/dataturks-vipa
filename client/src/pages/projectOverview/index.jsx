@@ -172,6 +172,12 @@ class ProjectOverview extends Component {
     } else {
       fetchHitsDetails(this.props.currentProject, 0, 20, this.hitsFetched, 'done')
     }
+<<<<<<< HEAD
+=======
+    // console.log(this.state.projectDetails.orgName, this.state.projectDetails.name)
+    // 获取项目 hitdetails
+    // fetchHitsDetails(this.state.projectDetails.id, 0, 20, this.hitsFetched, 'done')
+>>>>>>> tmp
   }
 
   componentWillReceiveProps(nextProps) {
@@ -256,7 +262,11 @@ class ProjectOverview extends Component {
     for (let index = 0; index < data.length; index++) {
       if (data[index].hitsDone > 0 || showZero) {
         arrs.push(
+<<<<<<< HEAD
           <tr key={index} style={{textAlign:'center'}}>
+=======
+          <tr key={index}>
+>>>>>>> tmp
             <td>{data[index].userDetails.firstName}</td>
             <td>{data[index].avrTimeTakenInSec}</td>
             <td>{data[index].hitsDone}</td>
@@ -285,7 +295,11 @@ class ProjectOverview extends Component {
     const projectDetails = this.state.projectDetails
     const { task_type, orgName, name } = this.state.projectDetails
 
+<<<<<<< HEAD
     console.log('opening screen ', screen)
+=======
+    // console.log('opening screen ', screen)
+>>>>>>> tmp
     // console.log('opening type ', type)
 
     if (screen === 'edit') {
@@ -300,7 +314,11 @@ class ProjectOverview extends Component {
         screenName = 'overview'
       }
       this.props.history.push({
+<<<<<<< HEAD
         pathname: '/projects/' + orgName + '/' + name + '/' + screenName,
+=======
+        pathname: '/userHome/projects/' + orgName + '/' + name + '/' + screenName,
+>>>>>>> tmp
         query: { type },
       })
     }
@@ -308,15 +326,24 @@ class ProjectOverview extends Component {
     else if (screen === 'space') {
       let path = ''
       if (this.state.projectDetails.task_type === 'IMAGE_POLYGON_BOUNDING_BOX_V2') {
+<<<<<<< HEAD
         path = `/projects/new/${orgName}/${name}/space?type=${type}`
+=======
+        path = `/projects/new/${orgName}/${name}/space?status=${type}`
+>>>>>>> tmp
       } else {
         path = `/projects/${orgName}/${name}/space?type=${type}`
       }
       this.props.history.push(path)
     } else {
       let path = '/userHome/projects/' + orgName + '/' + name + '/' + screen
+<<<<<<< HEAD
       console.log('link path :', path)
       this.props.history.push({                //
+=======
+
+      this.props.history.push({
+>>>>>>> tmp
         pathname: path,
         state: { ...projectDetails },
       })
@@ -490,7 +517,10 @@ class ProjectOverview extends Component {
             padding: '5px',
             color: 'white',
             backgroundColor: entityColorMap[ent],
+<<<<<<< HEAD
 
+=======
+>>>>>>> tmp
           }}
         >
           {' '}
@@ -498,11 +528,15 @@ class ProjectOverview extends Component {
         </Label>
       )
     }
+<<<<<<< HEAD
     return (
         <div>
           {renderArrs}
         </div>
     )
+=======
+    return <div> {renderArrs} </div>
+>>>>>>> tmp
   }
 
   showClassifications = hitsDetails => {
@@ -564,31 +598,49 @@ class ProjectOverview extends Component {
         <br />
         <br />
         <br />
+<<<<<<< HEAD
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', margin:'0 auto'}}>
+=======
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+>>>>>>> tmp
           <Button
             size="mini"
             color="grey"
             icon
             labelPosition="left"
+<<<<<<< HEAD
             onClick={this.previousElement.bind(this)}
+=======
+            onClick={this.previousElement.bind(this, 'pervious')}
+>>>>>>> tmp
             disabled={this.state.start === 0}
           >
             <Icon name="left arrow" />
             Previous
           </Button>
+<<<<<<< HEAD
 
+=======
+>>>>>>> tmp
           <Button
             size="mini"
             color="blue"
             icon
             labelPosition="right"
+<<<<<<< HEAD
             onClick={this.nextElement.bind(this)}
+=======
+            onClick={this.nextElement.bind(this, 'right')}
+>>>>>>> tmp
             disabled={this.state.start < 0 || this.state.start >= this.state.hitsDetails.length - 1}
           >
             Next
             <Icon name="right arrow" />
           </Button>
+<<<<<<< HEAD
 
+=======
+>>>>>>> tmp
         </div>
       </div>
     )
@@ -634,7 +686,11 @@ class ProjectOverview extends Component {
         }}
       >
         <div className={styles.dataArea}>
+<<<<<<< HEAD
           {!checkVideoURL(data) && <img className="img-respons" src={data}  width={'100%'}/>}
+=======
+          {!checkVideoURL(data) && <img className="img-respons" src={data} />}
+>>>>>>> tmp
           {checkVideoURL(data) && (
             <Player preload="auto" autoPlay poster="/assets/poster.png" src={data}>
               <ControlBar className={styles.controlBar}>
@@ -647,7 +703,13 @@ class ProjectOverview extends Component {
           )}
           <br />
           {this.showCurrentTags(currentTags)}
+<<<<<<< HEAD
         </div>
+=======
+          <br />
+        </div>
+        <br />
+>>>>>>> tmp
         {currentNote && currentNote.length > 0 && (
           <div>
             <p size="tiny" style={{ whiteSpace: 'pre-wrap', marginLeft: '10%' }}>
@@ -659,27 +721,46 @@ class ProjectOverview extends Component {
           </div>
         )}
         <br />
+<<<<<<< HEAD
         <div className="col-md-12">
           <div className="col-md-6" style={{textAlign:"center",}} >
+=======
+        <br />
+        <div className="col-md-12">
+          <div className="col-md-6">
+>>>>>>> tmp
             <Button
               size="mini"
               color="grey"
               icon
               labelPosition="left"
+<<<<<<< HEAD
               onClick={this.previousElement.bind(this)}
+=======
+              onClick={this.previousElement.bind(this, 'pervious')}
+>>>>>>> tmp
               disabled={this.state.start === 0}
             >
               <Icon name="left arrow" />
               Previous
             </Button>
           </div>
+<<<<<<< HEAD
           <div className="col-md-6" style={{textAlign:"center",}}>
+=======
+          <div className="col-md-6">
+>>>>>>> tmp
             <Button
               size="mini"
               color="blue"
               icon
+<<<<<<< HEAD
               labelPosition="right"                                 // 配置 "<=" 和 "Next" 或 "Previous" 的位置
               onClick={this.nextElement.bind(this)}
+=======
+              labelPosition="right"
+              onClick={this.nextElement.bind(this, 'right')}
+>>>>>>> tmp
               disabled={
                 this.state.start < 0 || this.state.start >= this.state.hitsDetails.length - 1
               }
@@ -1397,6 +1478,14 @@ class ProjectOverview extends Component {
       // console.log('extra data', hitsDetails, hitsDetails.len)
       extra = JSON.parse(hitsDetails[this.state.start].extras)
     }
+<<<<<<< HEAD
+=======
+    // console.log('extra data', extra)
+
+    // if (projectDetails.created_timestamp) {
+    //   createdDate = timeConverter(projectDetails.created_timestamp / 1000);
+    // }
+>>>>>>> tmp
 
     return (
       <div>
@@ -1438,8 +1527,12 @@ class ProjectOverview extends Component {
                         // disabled={!permissions.canUploadData}
                         onClick={this.openScreen.bind(this, 'edit', 'file')}
                       >
+<<<<<<< HEAD
                         <Icon name="add circle" color="blue" />
                         Add Data
+=======
+                        <Icon name="add circle" color="blue" /> Add Data
+>>>>>>> tmp
                       </Dropdown.Item>
                       <Dropdown.Item
                         // disabled={!permissions.canEditProject}
@@ -1788,6 +1881,7 @@ class ProjectOverview extends Component {
         )}
 
         {/*根据任务类型渲染组件内容，开始*/}
+<<<<<<< HEAD
         {/*{projectDetails &&*/}
         {/*  hitsDetails &&*/}
         {/*  hitsDetails.length > 0 &&*/}
@@ -1898,6 +1992,120 @@ class ProjectOverview extends Component {
         {/*      </Segment>*/}
         {/*    </Segment.Group>*/}
         {/*  )}*/}
+=======
+        {projectDetails &&
+          hitsDetails &&
+          hitsDetails.length > 0 &&
+          projectDetails.task_type === TEXT_SUMMARIZATION && (
+            <Segment.Group>
+              <Header attached="top" block as="h4">
+                <Icon name="list" disabled />
+                <>Sample Data</>
+              </Header>
+              <Segment padded>
+                {extra && <div>{this.showExtra(extra)}</div>}
+                {this.showSummaries(hitsDetails, TEXT_SUMMARIZATION)}
+              </Segment>
+            </Segment.Group>
+          )}
+
+        {projectDetails &&
+          hitsDetails &&
+          hitsDetails.length >= 0 &&
+          projectDetails.task_type === TEXT_MODERATION && (
+            <Segment.Group>
+              <Header attached="top" block as="h4">
+                <Icon name="list" disabled />
+                <>Sample Data</>
+              </Header>
+              <Segment padded>
+                {extra && <div>{this.showExtra(extra)}</div>}
+                {this.showSummaries(hitsDetails, TEXT_MODERATION)}
+              </Segment>
+            </Segment.Group>
+          )}
+
+        {projectDetails &&
+          hitsDetails &&
+          hitsDetails.length >= 0 &&
+          projectDetails.task_type === TEXT_CLASSIFICATION && (
+            <Segment.Group>
+              <Header attached="top" block as="h4">
+                <Icon name="list" disabled />
+                <>Sample Data</>
+              </Header>
+              <Segment padded>
+                <h3> Entities </h3>
+                {this.showTags(entities)}
+                <br />
+                {extra && <div>{this.showExtra(extra)}</div>}
+                <br />
+                {this.showClassifications(hitsDetails)}
+              </Segment>
+            </Segment.Group>
+          )}
+
+        {projectDetails &&
+          hitsDetails &&
+          hitsDetails.length >= 0 &&
+          (projectDetails.task_type === IMAGE_CLASSIFICATION ||
+            projectDetails.task_type === VIDEO_CLASSIFICATION) && (
+            <Segment.Group>
+              <Header attached="top" block as="h4">
+                <Icon name="list" disabled />
+                Sample Data
+              </Header>
+              <Segment padded>
+                <h3> Entities </h3>
+                {this.showTags(entities)}
+                <br />
+                {extra && <div>{this.showExtra(extra)}</div>}
+                <br />
+                {this.showClassificationImages(hitsDetails)}
+              </Segment>
+            </Segment.Group>
+          )}
+
+        {projectDetails &&
+          hitsDetails &&
+          hitsDetails.length >= 0 &&
+          projectDetails.task_type === POS_TAGGING && (
+            <Segment.Group>
+              <Header attached="top" block as="h4">
+                <Icon name="list" disabled />
+                Sample Data
+              </Header>
+              <Segment padded className="text-center" style={{ paddingBottom: '10%' }}>
+                <h3> Entities </h3>
+                {this.showTags(entities)}
+                <br />
+                {extra && <div>{this.showExtra(extra)}</div>}
+                <br />
+                {this.showPosTags(hitsDetails)}
+              </Segment>
+            </Segment.Group>
+          )}
+
+        {projectDetails &&
+          hitsDetails &&
+          hitsDetails.length >= 0 &&
+          projectDetails.task_type === IMAGE_BOUNDING_BOX && (
+            <Segment.Group>
+              <Header attached="top" block as="h4">
+                <Icon name="list" disabled />
+                Sample Data
+              </Header>
+              <Segment padded className="text-center" style={{ paddingBottom: '10%' }}>
+                <h3> Entities </h3>
+                {this.showTags(entities)}
+                <br />
+                {extra && <div>{this.showExtra(extra)}</div>}
+                <br />
+                {this.showBoundedImages(hitsDetails)}
+              </Segment>
+            </Segment.Group>
+          )}
+>>>>>>> tmp
 
         {/* {projectDetails &&
           hitsDetails &&
@@ -1919,6 +2127,7 @@ class ProjectOverview extends Component {
             </Segment.Group>
           )} */}
 
+<<<<<<< HEAD
         {/*{projectDetails &&*/}
         {/*  hitsDetails &&*/}
         {/*  hitsDetails.length >= 0 &&*/}
@@ -1978,6 +2187,67 @@ class ProjectOverview extends Component {
         {/*根据任务类型渲染组件内容，结束*/}
 
         {/*<div style={{ height: '50px' }} />*/}
+=======
+        {projectDetails &&
+          hitsDetails &&
+          hitsDetails.length >= 0 &&
+          projectDetails.task_type === IMAGE_POLYGON_BOUNDING_BOX && (
+            <Segment.Group loading={this.state.loading.toString()}>
+              <Header attached="top" block as="h4">
+                <Icon name="list" disabled />
+                Sample Data
+              </Header>
+              <Segment padded className="text-center" style={{ paddingBottom: '10%' }}>
+                <h3> Entities </h3>
+                {this.showTags(entities)}
+                <br />
+                {extra && <div>{this.showExtra(extra)}</div>}
+                <br />
+                {this.showPolygonImages(hitsDetails)}
+              </Segment>
+            </Segment.Group>
+          )}
+
+        {projectDetails &&
+          hitsDetails &&
+          hitsDetails.length >= 0 &&
+          projectDetails.task_type === VIDEO_BOUNDING_BOX && (
+            <Segment.Group loading={this.state.loading.toString()}>
+              <Header attached="top" block as="h4">
+                <Icon name="list" disabled />
+                Sample Data
+              </Header>
+              <Segment padded className="text-center" style={{ paddingBottom: '10%' }}>
+                <h3> Entities </h3>
+                {this.showTags(entities)}
+                <br />
+                {extra && <div>{this.showExtra(extra)}</div>}
+                <br />
+                {this.showVideoAnnotation(hitsDetails)}
+              </Segment>
+            </Segment.Group>
+          )}
+
+        {projectDetails &&
+          hitsDetails &&
+          hitsDetails.length >= 0 &&
+          (projectDetails.task_type === DOCUMENT_ANNOTATION ||
+            projectDetails.task_type === POS_TAGGING_GENERIC) && (
+            <Segment.Group loading={this.state.loading}>
+              <Header attached="top" block as="h4">
+                <Icon name="list" disabled />
+                Sample Data
+              </Header>
+              <Segment basic vertical className="text-center" style={{ paddingBottom: '10%' }}>
+                {extra && <div>{this.showExtra(extra)}</div>}
+                {this.showDocs(hitsDetails)}
+              </Segment>
+            </Segment.Group>
+          )}
+        {/*根据任务类型渲染组件内容，结束*/}
+
+        <div style={{ height: '50px' }} />
+>>>>>>> tmp
 
         {projectDetails && hitsDetails && hitsDetails.length >= 0 && (
           <div className="text-md-center text-xs-center">
