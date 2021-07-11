@@ -136,10 +136,11 @@ public class Constants {
 
     // Bazaar constants
     public static final String MSFT_CV_API_KEY =  "d3f0dc5cce724c3a99ce7c98651d6340";
-    public static final String GOOGLE_BAZAAR_API_KEY =  "AIzaSyBi2p_EhhshOu_izNy2pMR5HVuOGPSZqTA";
+    //public static final String GOOGLE_BAZAAR_API_KEY =  "AIzaSyBi2p_EhhshOu_izNy2pMR5HVuOGPSZqTA";
 
 
 
-
+	//图像转换py代码文件位置
+    public static final String trans_Py_Locate = "D:/gitdemo/dataturks-vipa-refactoring-4/hope/src/main/java/bonsai/Utils/ImageTransHandler/pyimage.py";
 
 }
