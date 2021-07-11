@@ -27,7 +27,7 @@ import java.util.UUID;
 public class UploadFileUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(UploadFileUtil.class);
-    public static final int BUFFER_SIZE = 1024*1024;
+    public static final int BUFFER_SIZE = 1024*1024;  //修改缓冲区大小
 
     private static UploadFileUtil instance = new UploadFileUtil();
     private Tika tika;
@@ -68,7 +68,7 @@ public class UploadFileUtil {
 
     public static String uploadStreamToFile(DReqObj reqObj, InputStream stream, FormDataContentDisposition fileDetail) {
 
-        long maxFileSize = reqObj.getConfigs().maxUploadSizeInBytes;
+        long maxFileSize = reqObj.getConfigs().maxUploadSizeInBytes;  //maxFileSize大小问题
 
         String path = getRandomUploadPath(fileDetail.getFileName());
         boolean success = copy(stream, Paths.get(path), maxFileSize);
@@ -91,6 +91,7 @@ public class UploadFileUtil {
             int n;
             while ((n = input.read(buf)) > 0) {
                 out.write(buf, 0, n);
+                //System.out.println("vipa");
                 nread += n;
                 if (nread > sizeLImitInBytes) {// Exceeds size
                     isExceed = true;
@@ -135,11 +136,15 @@ public class UploadFileUtil {
             //detecting the file type using detect method
             String filetype = tika.detect(in);// 获取上传文件的类型
             if (filetype != null) {
-                if (filetype.contains("image")) return DTypes.File_Type.IMAGE;
+                if (filetype.contains("image") && !filepath.contains("mrxs")) return DTypes.File_Type.IMAGE;
+                if (filetype.contains("image") && filepath.contains("mrxs")) return DTypes.File_Type.MRXS;
                 if (filetype.equalsIgnoreCase("text/plain")) return DTypes.File_Type.TEXT;
                 if (filetype.equalsIgnoreCase("application/pdf")) return DTypes.File_Type.PDF;
                 if (filetype.equalsIgnoreCase("application/x-tar")) return DTypes.File_Type.TAR;
                 if (filetype.equalsIgnoreCase("application/x-gzip")) return DTypes.File_Type.GZIP;
+                if (filetype.equalsIgnoreCase("application/gzip")) return DTypes.File_Type.GZ;
+                if (filetype.equalsIgnoreCase("application/dicom")) return DTypes.File_Type.DCM;
+                if (filetype.equalsIgnoreCase("application/octet-stream")) return DTypes.File_Type.NII;
                 // even docx files are returned as zip,
                 // look deeper to verify the actual type.
                 if (filetype.equalsIgnoreCase("application/zip")) {

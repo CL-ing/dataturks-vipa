@@ -52,6 +52,15 @@ public class DataStorageHandler {
             String storagePath = Constants.DEFAULT_FILE_STORAGE_DIR;
             Path folderPath = Paths.get(storagePath, folderName);
             String fileName = DUtils.createUniqueFileName(filePath);// 生成大图文件名
+            if(fileName.split("\\.")[1].equals("mrxs")) {
+                String mrxsName = filePath.split("/")[filePath.split("/").length - 1].split("\\.")[0];
+                File mrxsPathFile = new File(storagePath + "/" + folderName + "/" + mrxsName);
+                File mrxsPathFileTo = new File(storagePath + "/" + folderName + "/" + fileName.split("\\.")[0]);
+                mrxsPathFile.renameTo(mrxsPathFileTo);
+                File mrxsFile = new File(storagePath + "/" + folderName + "/" + mrxsName + ".mrxs");
+                File mrxsFileTo = new File(storagePath + "/" + folderName + "/" + fileName.split("\\.")[0] + ".mrxs");
+                mrxsFile.renameTo(mrxsFileTo);
+            }
             Path newFilePath = folderPath.resolve(fileName);// 生成大图对应的路径
             Path thumbnailFilePath = ThumbnailUtil.getThumbnailFilePath(folderPath, fileName);// 生成缩略图路径
             File directory = new File(folderPath.toString());

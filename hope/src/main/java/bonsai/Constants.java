@@ -18,19 +18,19 @@ public class Constants {
 
     //Data turks annotations
     //all files uploaded on the system.
-    public static final String DEFAULT_SERVER_ROOT = "E:/Github/dataturks-vipa/client/public";// 前端服务器根目录
-//    public static final String DEFAULT_SERVER_ROOT = "/home/dataturks/bazaar";// 前端服务器根目录
-//    public static final String DEFAULT_FILE_UPLOAD_DIR = "/tmp";// zip文件暂存目录
-    public static final String DEFAULT_FILE_UPLOAD_DIR =  DEFAULT_SERVER_ROOT + "/tmp";// zip文件暂存目录
-    public static final long MAX_FILE_UPLOAD_SIZE = 1024*1024*1024*10L; //10 GB.
+//    public static final String DEFAULT_SERVER_ROOT = "E:/Github/dataturks-vipa/client/build";// 前端服务器根目录
+    public static final String DEFAULT_SERVER_ROOT = "D:/gitdemo/dataturks-vipa-refactoring-4/client"; //"/home/dataturks/bazaar";// 前端服务器根目录
+    public static final String DEFAULT_FILE_UPLOAD_DIR = "D:/gitdemo/dataturks-vipa-refactoring-4/client/public/tmp";// zip文件暂存目录
+//    public static final String DEFAULT_FILE_UPLOAD_DIR =  DEFAULT_SERVER_ROOT + "/tmp";// zip文件暂存目录
+    public static final int MAX_FILE_UPLOAD_SIZE = 1024*1024*1024*10; //10 MB.
     public static final int MAX_STRING_LENGTH_FOR_TEXT_TASK = 1000;
     public static final int MAX_NUM_HITS_PER_PROJECT = 10000;
     public static final int NUM_LABELS_ALLOWED = 20000;
 
     public static final String DEFAULT_FILE_DOWNLOAD_DIR = "/Users/mohan/personal/dataturks/uploads";
 
-//    public static final String DEFAULT_FILE_STORAGE_DIR = "/home/dataturks/bazaar/uploads";// 图片存储目录
-    public static final String DEFAULT_FILE_STORAGE_DIR = DEFAULT_SERVER_ROOT + "/uploads";// 图片存储目录
+    public static final String DEFAULT_FILE_STORAGE_DIR = "D:/gitdemo/dataturks-vipa-refactoring-4/client/public/uploads";// 图片存储目录
+//    public static final String DEFAULT_FILE_STORAGE_DIR = DEFAULT_SERVER_ROOT + "/uploads";// 图片存储目录
 
 
 
@@ -138,9 +138,10 @@ public class Constants {
     public static final String MSFT_CV_API_KEY =  "d3f0dc5cce724c3a99ce7c98651d6340";
     public static final String GOOGLE_BAZAAR_API_KEY =  "AIzaSyBi2p_EhhshOu_izNy2pMR5HVuOGPSZqTA";
 
-
-
-	//图像转换py代码文件位置
+    //图像转换py代码文件位置
     public static final String trans_Py_Locate = "D:/gitdemo/dataturks-vipa-refactoring-4/hope/src/main/java/bonsai/Utils/ImageTransHandler/pyimage.py";
+
+
+
 
 }

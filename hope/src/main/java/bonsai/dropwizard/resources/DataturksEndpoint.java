@@ -7,12 +7,10 @@ import bonsai.Utils.ThumbnailUtil;
 import bonsai.Utils.UploadFileUtil;
 import bonsai.config.AppConfig;
 import bonsai.config.DBBasedConfigs;
-import bonsai.dropwizard.MetricUtils;
 import bonsai.dropwizard.dao.d.*;
 import bonsai.email.EmailSender;
 import bonsai.sa.EventsLogger;
 import bonsai.security.LoginAuth;
-import com.codahale.metrics.Timer;
 import dataturks.*;
 import dataturks.cache.CacheWrapper;
 import dataturks.license.LicenseHandler;
@@ -22,26 +20,16 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.misc.BASE64Encoder;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /*
@@ -315,6 +303,25 @@ public class DataturksEndpoint {
             int width = (int) Double.parseDouble(req.get("width"));
             int height = (int) Double.parseDouble(req.get("height"));
 
+            if(imgUrl.split("/")[imgUrl.split("/").length - 1].split("\\.")[1].equals("mrxs")) {
+                /*
+                String imgPath = Constants.DEFAULT_SERVER_ROOT + "/public" + imgUrl;
+                String mrxsPath = Constants.DEFAULT_SERVER_ROOT + "/public" + imgUrl.split("\\.")[0] + ".mrxs";
+                String outPath = MrxsThumbnailUtil.trans(imgPath, mrxsPath, x, y, width, height);
+                String base64Str = ThumbnailUtil.getMrxsBase64Str(outPath);
+                try {
+                    File file = new File(outPath);
+                    file.delete();
+                }
+                catch (Exception e) {
+                    LOG.error("Unable to delete image file " + outPath + " error = " + e.toString());
+                }
+                 */
+                String imgPath = Constants.DEFAULT_SERVER_ROOT + "/public" + imgUrl;
+                String mrxsPath = Constants.DEFAULT_SERVER_ROOT + "/public" + imgUrl.split("\\.")[0] + ".mrxs";
+                String base64Str = ThumbnailUtil.getMrxsBase64Str(imgPath, mrxsPath, x, y, width, height);
+                return new GetReflectImgResponse(base64Str);
+            }
             String base64Str = ThumbnailUtil.getImgBase64Str(imgUrl, x, y, width, height);
 
             return new GetReflectImgResponse(base64Str);// 返回值必须是一个对象
@@ -988,10 +995,9 @@ public class DataturksEndpoint {
         UploadResponse response = null;
         try {
             // get the config for the org.
-            DUtils.setConfigForOrg(reqObj);
+            DUtils.setConfigForOrg(reqObj);   //最大文件上限
             // 放在了Linux系统下的/tmp目录
             uploadedFile = UploadFileUtil.uploadStreamToFile(reqObj, stream, fileDetail);
-
             response =  Controlcenter.handleFileUpload(reqObj, projectId, uploadedFile);
             return response;
         }

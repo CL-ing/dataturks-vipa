@@ -6,17 +6,13 @@ import bonsai.config.DBBasedConfigs;
 import bonsai.dropwizard.DbConfig;
 import bonsai.dropwizard.MetricUtils;
 import bonsai.dropwizard.MetricsRequestFilter;
-import bonsai.dropwizard.dao.DBConfigEntry;
-import bonsai.dropwizard.dao.DBConfigEntryDAO;
-import bonsai.dropwizard.dao.KeyValueItem;
-import bonsai.dropwizard.dao.KeyValueItemDAO;
+import bonsai.dropwizard.dao.*;
 import bonsai.dropwizard.dao.d.*;
-import bonsai.dropwizard.resources.Admin;
-import bonsai.dropwizard.resources.DataturksAPIEndPoint;
-import bonsai.dropwizard.resources.DataturksEndpoint;
+import bonsai.dropwizard.resources.*;
 import bonsai.email.ScheduledEmails;
 import com.codahale.metrics.servlets.MetricsServlet;
 import dataturks.aws.S3Handler;
+import dataturks.jobs.LabelCounts;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
@@ -35,9 +31,11 @@ import java.util.EnumSet;
 public class MainApp extends Application<DbConfig> {
 
     /**
-     * Hibernate bundle.新建一个 Hibernate 实例
+     * Hibernate bundle.
      */
-    private final HibernateBundle<DbConfig> hibernateBundle = new HibernateBundle<DbConfig>(
+    private final HibernateBundle<DbConfig> hibernateBundle
+            = new HibernateBundle<DbConfig>(
+
             DBConfigEntry.class,
             KeyValueItem.class,
             DHits.class,
@@ -53,13 +51,13 @@ public class MainApp extends Application<DbConfig> {
             DAPIKeys.class,
             DLicense.class
     ) {
-        @Override
-        public DataSourceFactory getDataSourceFactory(DbConfig configuration) {
+        public DataSourceFactory getDataSourceFactory(
+                DbConfig configuration
+        ) {
             return configuration.getDataSourceFactory();
         }
     };
 
-    // 必须有 main 方法标记这是个主类
     public static void main(String[] args) throws Exception {
         new MainApp().run(args);
     }
@@ -71,17 +69,19 @@ public class MainApp extends Application<DbConfig> {
 
     @Override
     public void initialize(Bootstrap<DbConfig> bootstrap) {
-        // 在 Bootstrap 注册 hibernate
+        // nothing to do yet
         bootstrap.addBundle(hibernateBundle);
     }
 
     @Override
-    public void run(DbConfig configuration, Environment environment) {
+    public void run(DbConfig configuration,
+                    Environment environment) {
 
-        new EnableCors(environment).insecure();// 配置跨域
+        new EnableCors(environment).insecure();
 
-        // 下面是各种 dao 实例
+
         final DBConfigEntryDAO dbConfigEntryDAO = new DBConfigEntryDAO(hibernateBundle.getSessionFactory());
+
         final KeyValueItemDAO keyValueItemDAO = new KeyValueItemDAO(hibernateBundle.getSessionFactory());
 
         //Dataturks annotation initi.
@@ -99,8 +99,12 @@ public class MainApp extends Application<DbConfig> {
         final DLicenseDAO dLicenseDAO = new DLicenseDAO(hibernateBundle.getSessionFactory());
 
         // bazaar initialization
+
+
         AppConfig.getInstance().setDbConfigEntryDAO(dbConfigEntryDAO);
+
         AppConfig.getInstance().setKeyValueItemDAO(keyValueItemDAO);
+
 
         // Dataturks init.
         AppConfig.getInstance().setdHitsDAO(dHitsDAO);
@@ -116,10 +120,15 @@ public class MainApp extends Application<DbConfig> {
         AppConfig.getInstance().setDapiKeysDAO(dapiKeysDAO);
         AppConfig.getInstance().setdLicenseDAO(dLicenseDAO);
 
+
+
         initWholeApp(configuration);
 
         //Dropwizar specific.
+
         final Admin admin = new Admin();
+
+
 
         //Dataturks endpoint
         final DataturksEndpoint dataturksEndpoint = new DataturksEndpoint();
@@ -128,6 +137,7 @@ public class MainApp extends Application<DbConfig> {
         //Dataturks API
         final DataturksAPIEndPoint dataturksAPIEndPoint = new DataturksAPIEndPoint();
         environment.jersey().register(dataturksAPIEndPoint);
+
 
         environment.jersey().register(admin);
         environment.jersey().register(MultiPartFeature.class);
@@ -146,9 +156,9 @@ public class MainApp extends Application<DbConfig> {
         S3Handler.getInstance(); //init s3
         //LabelCounts.getInstance(); // a job to calculate label counts.
         MetricUtils.setupExportData();
+
     }
 
-    // 配置跨域
     protected class EnableCors {
         private Environment environment;
 

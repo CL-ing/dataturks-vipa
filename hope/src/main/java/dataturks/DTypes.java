@@ -55,6 +55,10 @@ public class DTypes {
         DOC,
         DOCX,
         PDF,
+        DCM,
+        MRXS,
+        NII,
+        GZ,
         OTHERS
     }
 

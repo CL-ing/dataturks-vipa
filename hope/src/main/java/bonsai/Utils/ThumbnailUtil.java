@@ -4,6 +4,7 @@ import bonsai.Constants;
 import bonsai.dropwizard.resources.DataturksEndpoint;
 import dataturks.DConstants;
 import net.coobird.thumbnailator.Thumbnails;
+import org.openslide.OpenSlide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Encoder;
@@ -73,7 +74,7 @@ public class ThumbnailUtil {
             Iterator readers = ImageIO.getImageReadersByFormatName(format);
             ImageReader reader = (ImageReader) readers.next();
             // 获取原始图片路径
-            imgUrl = Constants.DEFAULT_SERVER_ROOT + "/" + imgUrl;
+            imgUrl = Constants.DEFAULT_SERVER_ROOT + "/public" +imgUrl;
             // 获取图片流
             source = new FileInputStream(imgUrl);
             iis = ImageIO.createImageInputStream(source);
@@ -102,4 +103,36 @@ public class ThumbnailUtil {
             outputStream.close();
         }
     }
+    public static String getMrxsBase64Str(String imgPath, String mrxsPath, int x, int y, int width, int height) throws IOException {
+
+        ByteArrayOutputStream outputStream = null;
+
+        try{
+            int hThumb, wThumb, xOut, yOut, wOut, hOut, hMrxs, wMrxs;
+            BufferedImage image = ImageIO.read(new File(imgPath));
+            File file = new File(mrxsPath);
+            OpenSlide os = new OpenSlide(file);
+            hMrxs = (int)(os.getLevel0Height());  //强制类型转换 long->int
+            wMrxs = (int)(os.getLevel0Width());
+            hThumb = image.getHeight();
+            wThumb = image.getWidth();
+            xOut = (int)(1.0 * x / hThumb * hMrxs);
+            yOut = (int)(1.0 * y / wThumb * wMrxs);
+            wOut = (int)(1.0 * width / wThumb * wMrxs);
+            hOut = (int)(1.0 * height / hThumb * hMrxs);
+            BufferedImage img = os.createThumbnailImage(xOut,yOut,wOut, hOut,15000,BufferedImage.TYPE_INT_RGB);
+            outputStream = new ByteArrayOutputStream();
+            ImageIO.write(img, "jpg", outputStream);
+
+            BASE64Encoder encoder = new BASE64Encoder();
+            os.close();
+            return encoder.encode(outputStream.toByteArray());
+        } catch(Exception e) {
+            LOG.error("Error "+ e.toString() + " " + CommonUtils.getStackTraceString(e));
+            throw e;
+        }
+
+    }
+
 }
+

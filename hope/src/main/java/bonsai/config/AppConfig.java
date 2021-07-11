@@ -44,7 +44,6 @@ public class AppConfig {
 
     private final MetricRegistry metrics = new MetricRegistry();
 
-    // 单例模式
     private static AppConfig instance = new AppConfig();
 
     private AppConfig(){
@@ -53,7 +52,6 @@ public class AppConfig {
     public static AppConfig getInstance() {
         return instance;
     }
-
     //NOTE: make sure this method is called on app initialization always.
     public void init(DbConfig dbConfig) {
         LOG.info("Initing the app config...");
@@ -96,7 +94,10 @@ public class AppConfig {
         this.dbConfigEntryDAO = dbConfigEntryDAO;
     }
 
+
+
     //Dataturks annotations.
+
 
     public DHitsDAO getdHitsDAO() {
         return dHitsDAO;

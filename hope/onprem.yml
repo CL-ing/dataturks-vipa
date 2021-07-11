@@ -15,13 +15,10 @@ database:
   # the password
   password: 123456
   # the JDBC URL; the database is called DWGettingStarted
-  url: jdbc:mysql://127.0.0.1:3306/hope?serverTimezone=Asia/Shanghai
+  url: jdbc:mysql://127.0.0.1:3306/hope?serverTimezone=CST
   # Hibernate properties
   properties:
       hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
-      hibernate.hbm2ddl.auto: update
-      hibernate.format_sql: true
-      # hibernate.show_sql: true
 
 logging:
   # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
@@ -41,6 +38,13 @@ server:
   applicationConnectors:
     - type: http
       port: 9090
+      #- type: https
+      #  port: 8443
+      #  keyStorePath: ./keys/bonsaiapp.jks
+      #  keyStorePassword: bonsai
+      #trustStorePath: /usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/security/cacerts
+    #  trustStorePath: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/security/cacerts
+    #  validateCerts: false
   requestLog:
     appenders:
       - type: file

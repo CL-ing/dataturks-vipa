@@ -1,6 +1,11 @@
 package dataturks;
 
+import bonsai.Utils.ImageTransHandler.ImageTransUtil;
+import bonsai.Constants;
+
 import bonsai.Utils.CommonUtils;
+import bonsai.Utils.ImageTransHandler.MrxsDealUtil;
+import bonsai.Utils.ImageTransHandler.NiiTransUtil;
 import bonsai.Utils.UploadFileUtil;
 import bonsai.config.AppConfig;
 import bonsai.config.DBBasedConfigs;
@@ -11,7 +16,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import dataturks.aws.S3Handler;
 import dataturks.response.UploadResponse;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -20,6 +24,8 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -502,6 +508,15 @@ public class DataUploadHandler {
         }
 
         urls.add(url);
+        try {                 //删除转换后图像文件
+            if (filePath != null) {
+                File file = new File(filePath);
+                file.delete();
+            }
+        }
+        catch (Exception e) {
+            //do nothing
+        }
         return handleTasksWithURLs(reqObj, project, urls);
     }
 
@@ -573,10 +588,49 @@ public class DataUploadHandler {
             return handleImageTasksWithSingleImageFile(reqObj, project, filePath);
         }
         else if (type == DTypes.File_Type.ZIP || type == DTypes.File_Type.TAR || type == DTypes.File_Type.GZIP) {
-            return handleImageTasksZip(reqObj, project, filePath);
+            String folderName = project.getId();                   //将mrxs超大图文件解压后直接存入项目文件夹
+            String storagePath = Constants.DEFAULT_FILE_STORAGE_DIR;
+            Path folderPath = Paths.get(storagePath, folderName);
+            File directory = new File(folderPath.toString());
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            String filePathOut = MrxsDealUtil.mrxsTrans(filePath, Constants.DEFAULT_FILE_UPLOAD_DIR, folderPath.toString());  //MRXS文件处理
+            if(filePathOut.equals(filePath)) {
+                return handleImageTasksZip(reqObj, project, filePath);        //ZIP文件
+            } else {
+                filePath = filePathOut;
+                return handleImageTasksWithSingleImageFile(reqObj, project, filePath);
+            }
         }
         else if (type == DTypes.File_Type.TEXT){
             return handleTasksWithTextFileWithURLs(reqObj, project, filePath);
+        }
+        else if (type == DTypes.File_Type.DCM){
+            filePath = ImageTransUtil.trans(filePath, Constants.DEFAULT_FILE_UPLOAD_DIR);
+            return handleImageTasksWithSingleImageFile(reqObj, project, filePath);
+        }
+        else if (type == DTypes.File_Type.NII || type == DTypes.File_Type.GZ){
+            List<String> imageFiles = NiiTransUtil.trans(filePath, Constants.DEFAULT_FILE_UPLOAD_DIR);
+            List<String> urls = DataStorageHandler.uploadAndGetURLs(imageFiles, project);
+            UploadResponse responseOut =  handleTasksWithURLs(reqObj, project, urls);
+
+            //update the files which were not uploaded.
+            if (responseOut != null) {
+                int filesIgnored = imageFiles.size() - urls.size();
+                responseOut.setNumHitsIgnored(responseOut.getNumHitsIgnored() + filesIgnored);
+            }
+            for (String fileName : imageFiles) {
+                try {
+                    File file = new File(fileName);
+                    file.delete();
+                }
+                catch (Exception e) {
+                    LOG.error("Unable to delete image file " + fileName + " created for project " + project.getId() + " error = " + e.toString());
+                }
+            }
+            return responseOut;
         }
         else {
             throw new WebApplicationException("Please upload a valid image/zip file or a text file containing image URLs.", Response.Status.BAD_REQUEST);
